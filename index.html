@@ -1,183 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Search App</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Image Search App</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-    <style>
-        *{
-            box-sizing: border-box;
-        }
-        body{
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #d9f8f5, #c7ffe0);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+      min-height: 100vh;
+      animation: fadeIn 1s ease-in;
+    }
 
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            height: 100vh;
-            width: 100%;
-            background-color: #a9f7c0;
-            margin-top: 3%;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-        }
+    h1 {
+      color: #026a4d;
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      animation: slideDown 0.8s ease;
+    }
 
-        h1{
-            color: #1c1a53;
-            font-size: 2.5rem;
-            font-weight: bolder;
-        }
+    @keyframes slideDown {
+      from { transform: translateY(-30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
 
-        form {
-            width: 100%;
-            height: 60px;
-            padding: 10px;
-            margin: 10px;
-            display: flex;
-            justify-content: center;
-        }
+    form {
+      display: flex;
+      width: 100%;
+      max-width: 800px;
+      margin-bottom: 2rem;
+      animation: fadeIn 1.2s ease;
+    }
 
-        input{
-            width: 80%;
-            height: 100%;
-            border-radius: 20px;
-            padding: 10px;
-            font-size: 1.2rem;
-            border: none;
-            outline: none;
-        }
+    input {
+      flex: 1;
+      padding: 0.8rem 1rem;
+      font-size: 1.2rem;
+      border: 2px solid #06ec7d;
+      border-right: none;
+      border-radius: 30px 0 0 30px;
+      outline: none;
+      transition: box-shadow 0.3s ease;
+    }
 
-        button{
-            width: 14%;
-            height: 100%;
-            border-radius: 20px;
-            margin-left: 10px;
-            padding: 10px;
-            font-weight: bolder ;
-            border: none;
-            outline: none;
-            background-color: #06ec7d;
-            color: white;
-            cursor: pointer;
-        }
+    input:focus {
+      box-shadow: 0 0 8px rgba(6, 236, 125, 0.5);
+    }
 
-        h2{
-            color: #4c4a4a;
-            font-size: 2rem;
-            font-weight: bolder;
-        }
-       
-         .containor{
-            display: flex;
-            gap: 20px;
-            margin-top: 20px;
-            width: 100%;
-            height: 100%;
-            flex-wrap: wrap;
-            justify-content: center;
-            padding: 10px;
-         }
+    button {
+      padding: 0.8rem 1.5rem;
+      background-color: #06ec7d;
+      color: white;
+      font-size: 1.2rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 0 30px 30px 0;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s;
+    }
 
-         .containor img{
-            height: 300px;
-            width: 300px;
-            border-radius: 10px;
-            object-fit: cover;
-         }
+    button:hover {
+      background-color: #04c96b;
+      transform: scale(1.05);
+    }
 
-         @media screen and (max-width: 640px){
-            .containor img{
-                height: 350px;
-                width: 350px;
-            }
-            input{
-            width: 70%;
-            height: 100%;
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 1200px;
+    }
 
-        }
+    .container img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      opacity: 0;
+      animation: fadeInImage 0.6s ease forwards;
+    }
 
-        button{
-            width: 15%;
-            height: 100%;
-            
-        }
-            
-         }
+    @keyframes fadeInImage {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
 
+    .container img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
 
+    h2 {
+      grid-column: 1 / -1;
+      text-align: center;
+      color: #555;
+      font-size: 1.6rem;
+      animation: fadeIn 0.5s ease;
+    }
 
-        
-    
-      
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2.2rem;
+        text-align: center;
+      }
 
-    </style>
+      form {
+        flex-direction: column;
+        align-items: stretch;
+      }
 
+      input, button {
+        width: 100%;
+        border-radius: 30px;
+        margin: 5px 0;
+      }
 
-
+      .container img {
+        height: 200px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h1>
-        Image Search App
-    </h1>
-    <form>
-        <input type="text" placeholder="Search A Keyword">
-        <button type="submit" class="Submit">Search</button>
-    </form>
+  <h1>Image Search App</h1>
+  <form>
+    <input type="text" placeholder="Search a keyword" />
+    <button type="submit" class="Submit">Search</button>
+  </form>
+  <section>
+    <div class="container">
+      <h2>No Image Show</h2>
+    </div>
+  </section>
 
-    <section >
-        <div class="containor">
-            <h2>No Image Show</h2>
-        </div>
-        
-    </section>
+  <script>
+    const API_KEY = "ku0X-VPV-txKTZSeSkuuQwlFtyz0jm3D2NrWb379q6E";
+    const searchForm = document.querySelector("form");
+    const searchInput = document.querySelector("input");
+    const container = document.querySelector(".container");
 
+    const fetchImages = async (query) => {
+      container.innerHTML = "";
+      const baseURL = `https://api.unsplash.com/photos/random/?client_id=${API_KEY}&query=${query}&count=50`;
 
+      try {
+        const response = await fetch(baseURL);
+        const data = await response.json();
 
+        if (Array.isArray(data) && data.length > 0) {
+          data.forEach((image, i) => {
+            const img = document.createElement("img");
+            img.src = image.urls.regular;
+            img.style.animationDelay = `${i * 0.05}s`;
+            container.appendChild(img);
+          });
+        } else {
+          container.innerHTML = `<h2>No images found for "${query}" 😞</h2>`;
+        }
+      } catch (error) {
+        container.innerHTML = `<h2>Error fetching images. Try again later.</h2>`;
+        console.error("Fetch error:", error);
+      }
+    };
 
-
-
-   <script>
-          const API_KEY = "ku0X-VPV-txKTZSeSkuuQwlFtyz0jm3D2NrWb379q6E"
-          const searchform = document.querySelector('form');
-          const SearchInput = document.querySelector('input');
-          const sectionbox = document.querySelector('.containor');
-          const Submit = document.querySelector('.Submit');
-
-
-          const fetchImages = async (query) => {
-             sectionbox.innerHTML = "";
-              const baseURL = `https://api.unsplash.com/photos/random/?client_id=${API_KEY}&query=${query}&count=50`;
-              const response = await fetch(baseURL);
-              const data = await response.json();
-              
-              data.forEach(image => {
-                  const img = document.createElement('img');
-                  img.src = image.urls.regular;
-                  sectionbox.appendChild(img);
-              });
-              
-          
-          }
-
-            searchform.addEventListener('submit', (e) =>{
-                e.preventDefault();
-               
-                const searchTerm = SearchInput.value;
-                
-                if(searchTerm !==""){
-                    fetchImages(searchTerm);  
-                }
-                else{
-        
-                    sectionbox.innerHTML = `<h2>No Image Found ! <span>😞</span></h2>`;
-                }
-            })
-
-
-
-
-   </script>
+    searchForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const searchTerm = searchInput.value.trim();
+      if (searchTerm) {
+        fetchImages(searchTerm);
+      } else {
+        container.innerHTML = `<h2>Please enter a search term.</h2>`;
+      }
+    });
+  </script>
 </body>
 </html>
